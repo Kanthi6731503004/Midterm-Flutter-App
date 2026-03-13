@@ -82,10 +82,4 @@ The app works fully offline with SQLite even without Firebase configured.
 2. **Check-in Screen** — 3-step flow: GPS capture → QR scan → reflection form
 3. **Finish Class Screen** — Select active session → GPS → QR → post-class form
 
----
 
-## AI Usage Report
-
-- **AI Tools Used:** Gemini (Antigravity coding assistant)
-- **AI Generated:** Flutter UI scaffolding, SQLite database service, GPS location service, QR scanner integration, data model structure, project configuration
-- **Manually Modified/Implemented:** Firebase project setup, deployment configuration, testing on device
