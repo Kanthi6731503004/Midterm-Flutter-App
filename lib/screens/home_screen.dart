@@ -40,14 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
-        title: const Text(
-          '📚 Smart Class Check-in',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: const Text('📚 Smart Class Check-in'),
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF6C63FF), Color(0xFF5A52D5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
         ),
-        centerTitle: true,
-        backgroundColor: const Color(0xFF6C63FF),
         foregroundColor: Colors.white,
-        elevation: 0,
+        elevation: 10,
+        shadowColor: const Color(0xFF6C63FF).withValues(alpha: 0.5),
       ),
       body: RefreshIndicator(
         onRefresh: _loadRecords,
@@ -62,16 +68,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF6C63FF), Color(0xFF4ECDC4)],
+                    colors: [Color(0xFF4ECDC4), Color(0xFF2EBFB3)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 6),
+                      color: const Color(0xFF4ECDC4).withValues(alpha: 0.4),
+                      blurRadius: 15,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),
@@ -219,12 +225,12 @@ class _ActionCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.15),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
+              color: color.withValues(alpha: 0.2),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
@@ -272,11 +278,18 @@ class _RecordCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
         border: Border.all(
           color: record.isCompleted
-              ? const Color(0xFF00B894).withValues(alpha: 0.3)
-              : const Color(0xFFFDCB6E).withValues(alpha: 0.5),
+              ? const Color(0xFF00B894).withValues(alpha: 0.2)
+              : const Color(0xFFFDCB6E).withValues(alpha: 0.3),
         ),
       ),
       child: Row(

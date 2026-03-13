@@ -107,9 +107,19 @@ class _CheckinScreenState extends State<CheckinScreen> {
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
         title: const Text('📍 Class Check-in'),
-        backgroundColor: const Color(0xFF6C63FF),
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF6C63FF), Color(0xFF5A52D5)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
-        elevation: 0,
+        elevation: 10,
+        shadowColor: const Color(0xFF6C63FF).withValues(alpha: 0.5),
       ),
       body: Stepper(
         currentStep: _currentStep,
@@ -297,10 +307,12 @@ class _CheckinScreenState extends State<CheckinScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00B894),
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: const EdgeInsets.symmetric(vertical: 18),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(16),
                         ),
+                        elevation: 8,
+                        shadowColor: const Color(0xFF00B894).withValues(alpha: 0.5),
                       ),
                       child: _submitting
                           ? const SizedBox(

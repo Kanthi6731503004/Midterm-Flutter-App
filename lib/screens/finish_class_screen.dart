@@ -125,9 +125,19 @@ class _FinishClassScreenState extends State<FinishClassScreen> {
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
         title: const Text('🏁 Finish Class'),
-        backgroundColor: const Color(0xFFFF6B6B),
+        backgroundColor: Colors.transparent,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFFFF6B6B), Color(0xFFEE5253)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
-        elevation: 0,
+        elevation: 10,
+        shadowColor: const Color(0xFFFF6B6B).withValues(alpha: 0.5),
       ),
       body: _loadingSessions
           ? const Center(child: CircularProgressIndicator())
@@ -430,15 +440,17 @@ class _FinishClassScreenState extends State<FinishClassScreen> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: _submitting ? null : _submit,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF00B894),
-                              foregroundColor: Colors.white,
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF00B894),
+                                foregroundColor: Colors.white,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 18),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                elevation: 8,
+                                shadowColor: const Color(0xFF00B894).withValues(alpha: 0.5),
                               ),
-                            ),
                             child: _submitting
                                 ? const SizedBox(
                                     height: 20,
