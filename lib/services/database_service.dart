@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/checkin_record.dart';
 
 class DatabaseService {
@@ -54,16 +53,6 @@ class DatabaseService {
       record.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    
-    // Sync new record to Firestore
-    try {
-      await FirebaseFirestore.instance
-          .collection('checkins')
-          .doc(record.id)
-          .set(record.toMap());
-    } catch (e) {
-      debugPrint('Error syncing to Firestore: \$e');
-    }
   }
 
   Future<void> updateFinishClass({
@@ -87,22 +76,6 @@ class DatabaseService {
       where: 'id = ?',
       whereArgs: [id],
     );
-    
-    // Sync finish update to Firestore
-    try {
-      await FirebaseFirestore.instance
-          .collection('checkins')
-          .doc(id)
-          .update({
-        'finish_time': finishTime.toIso8601String(),
-        'finish_lat': finishLat,
-        'finish_lng': finishLng,
-        'learned_today': learnedToday,
-        'feedback': feedback,
-      });
-    } catch (e) {
-      debugPrint('Error syncing update to Firestore: \$e');
-    }
   }
 
   Future<List<CheckinRecord>> getAllRecords() async {
