@@ -107,11 +107,45 @@ Universities struggle to verify that students are genuinely present and engaged 
 
 ---
 
+## Technical Architecture
+
+The application follows a clean layered architecture pattern:
+
+### 1. Presentation Layer (UI)
+- **State Management**: Built-in Flutter `setState` scoped to stateful widgets.
+- **UI Components**: Custom reusable cards, styled forms, and multi-step `Stepper` navigation.
+- **Design System**: Global `ThemeData` enforcing Google Fonts (Outfit), vibrant glassmorphism gradients, and elevated shadows.
+
+### 2. Service Layer (Business Logic)
+- `DatabaseService`: Singleton pattern handling all asynchronous CRUD operations to the local database.
+- `LocationService`: Utility wrapper around `geolocator` ensuring safe permission requests and timeout handling.
+
+### 3. Data Access Layer
+- `sqflite` implementation handling raw SQL transactions.
+- Web support provided via `sqflite_common_ffi_web` injected WebAssembly workers (`sqlite3.wasm`).
+
+---
+
+## Security & Edge Cases
+- **Missing Permissions**: The app gracefully catches denied Camera or Location permissions and provides clear SnackBar error messages without crashing.
+- **Fake Check-ins**: By enforcing real-time GPS coordinates and requiring physical QR scans, the app prevents students from spoofing their attendance remotely.
+- **Offline Reliability**: The decision to rely fully on SQLite ensures that students in classrooms with poor Wi-Fi or cellular dead-zones can still complete their check-ins instantly.
+
+---
+
+## UI/UX Guidelines
+- **Color Palette**: Primary Indigo (`#6C63FF`), Success Teal (`#00B894`), Alert Red (`#FF6B6B`), Warning Yellow (`#FDCB6E`).
+- **Typography**: Google Fonts "Outfit" for excellent legibility on mobile devices.
+- **Interaction**: All network and database calls show loading spinners on primary action buttons to prevent duplicate submissions.
+- **Feedback**: Instant visual SnackBars (`✅ Done` or `❌ Error`) confirm every critical action.
+
+---
+
 ## Minimum Viable Screens
 
-1. **Home Screen** — Entry point with Check-in and Finish Class actions
-2. **Check-in Screen** — GPS capture, QR scan, pre-class form
-3. **Finish Class Screen** — GPS capture, QR scan, post-class form
+1. **Home Screen** — Entry point with Check-in and Finish Class actions, plus a dynamic list of recent sessions sorted by newest first.
+2. **Check-in Screen** — 3-step vertical stepper: GPS validation → QR Camera Detection → Pre-class learning reflection form.
+3. **Finish Class Screen** — Active session selector → GPS exit validation → QR Camera Detection → Post-class pedagogical feedback form.
 
 ---
 
